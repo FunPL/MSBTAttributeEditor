@@ -27,7 +27,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- task: GitHubRelease@0
+  displayName: ‘Edit GitHub Release’
+  inputs: 
+    gitHubConnection: FunPL
+    repositoryName: FunPL/MSBTAttributeEditor
+    action: edit
+    tag: $(draftReleaseTag)
+    assets: $(Build.ArtifactStagingDirectory)/distributableBinaries/* 
