@@ -28,13 +28,15 @@ steps:
 
 - task: GitHubRelease@0
   inputs:
-    gitHubConnection: 'FunPLGit'
+    gitHubConnection: 'FunPL'
     repositoryName: 'FunPL/MSBTAttributeEditor'
     action: 'create'
     target: '$(Build.SourceVersion)'
     tagSource: 'manual'
     tag: '$(releaseTag)'
     title: '$(releaseTitle)'
-    assets: '$(Build.ArtifactStagingDirectory)/distributableBinaries/*'
+    assets: |
+      '$(Build.ArtifactStagingDirectory)/*.exe'
+      '$(Build.ArtifactStagingDirectory)/*.dll'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
