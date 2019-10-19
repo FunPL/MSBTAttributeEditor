@@ -79,7 +79,7 @@
       <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Syroot.BinaryData">
-      <HintPath>M:\Pobrane\MSBTPatch-master\MSBTPatch-master\MSBTPatch\bin\Debug\Syroot.BinaryData.dll</HintPath>
+      <HintPath>Syroot.BinaryData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
