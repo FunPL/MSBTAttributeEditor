@@ -27,11 +27,14 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: GitHubRelease@0
-  displayName: ‘Edit GitHub Release’
-  inputs: 
-    gitHubConnection: FunPL
-    repositoryName: FunPL/MSBTAttributeEditor
-    action: edit
-    tag: $(releaseTag)
-    assets: $(Build.ArtifactStagingDirectory)/distributableBinaries/* 
-    isDraft: false
+  inputs:
+    gitHubConnection: 'FunPLGit'
+    repositoryName: 'FunPL/MSBTAttributeEditor'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'manual'
+    tag: '$(releaseTag)'
+    title: '$(releaseTitle)'
+    assets: '$(Build.ArtifactStagingDirectory)/distributableBinaries/*'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
