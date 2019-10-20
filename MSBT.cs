@@ -150,6 +150,8 @@ namespace MSBTEditor
         {
             BinaryDataWriter writer = new BinaryDataWriter(stream, Encoding.ASCII) { ByteOrder = ByteOrder.BigEndian };
 
+            int[] order = new[] { 3, 4, 1, 2 };
+
             // order by id so that code works
             entries = entries.OrderBy(x => x.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
 
@@ -157,7 +159,12 @@ namespace MSBTEditor
 
             writer.WriteObject(FilePart1);
 
-            writer.Position -= 8;
+            writer.Position -= 20;
+
+            writer.WriteObject(BitConverter.GetBytes(Convert.ToUInt32(entries.Count * 25 + 8)));
+
+            writer.Position += 8;
+            //writer.Position -= 8;
 
             writer.WriteObject(BitConverter.GetBytes(Convert.ToUInt32(entries.Count)));
 
@@ -185,9 +192,8 @@ namespace MSBTEditor
             if (writer.Position % 16 != 0)
                 writer.WritePadding(0xAB);
             writer.Position = 16;
-            int[] order = new[] { 3, 4, 1, 2 };
+            
             var bytes = BitConverter.GetBytes(Convert.ToUInt32(writer.Length));
-            Console.WriteLine(BitConverter.ToString(bytes));
             writer.WriteObject(order.Select(i => bytes[i-1]));
         }
 
